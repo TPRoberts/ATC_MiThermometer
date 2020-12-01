@@ -26,10 +26,10 @@ RAM bool show_batt_or_humi;
 //Settings
 RAM bool temp_C_or_F;
 RAM bool blinking_smiley = false;
-RAM bool comfort_smiley = true;
-RAM bool show_batt_enabled = true;
+RAM bool comfort_smiley = false; // Don't show comfort smiley
+RAM bool show_batt_enabled = false; // Don't show battery
 RAM bool advertising_type = false;//Custom or Mi Advertising (true)
-RAM uint8_t advertising_interval = 6;//advise new values - multiply by 10 for value
+RAM uint8_t advertising_interval = 60;//advise new values - multiply by 10 for value
 RAM uint8_t measure_interval = 10;//time = loop interval * factor (def: about 7 * X)
 RAM int8_t temp_offset;
 RAM int8_t humi_offset;
@@ -63,6 +63,7 @@ void user_init_normal(void){//this will get executed one time after power up
 	init_lcd();	
 	init_flash();
 	show_atc_mac();
+	show_smiley(0); // Disbale the Smiley from start-up
 	battery_mv = get_battery_mv();
 	battery_level = get_battery_level(get_battery_mv());
 }
